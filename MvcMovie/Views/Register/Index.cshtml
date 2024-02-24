@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Registrarse";
+}
+<h1 class="is-size-2">Registrarse</h1>
+
+<form asp-action="Create">
+    <div class="field">
+        <label for="Name" class="label">Nombre de usuario</label>
+        <div class="control">
+            <input required id="Name" name="Name" class="input" type="text" placeholder="juanmanuel...">
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="Email" class="label">Email</label>
+        <div class="control">
+            <input required id="Email" name="Email" class="input" type="email" placeholder="juanmanuel@gmail.com">
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="Password" class="label">Contraseña</label>
+        <div class="control">
+            <input required id="Password" name="Password" class="input" type="password" placeholder="">
+        </div>
+    </div>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button type="submit" class="button is-link">Registrarse</button>
+        </div>
+    </div>
+</form>

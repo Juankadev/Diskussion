@@ -21,7 +21,7 @@ namespace Diskussion.Controllers
 
         public IActionResult Create()
         {
-            return base.View();
+            return View();
         }
 
         [HttpPost]
@@ -30,7 +30,7 @@ namespace Diskussion.Controllers
         {
             var newDiscussion = new Discussion()
             {
-                IdAuthor = 2,
+                IdAuthor = long.Parse(HttpContext.Session.GetString("User_Id")),
                 Title = discussion.Title,
                 Description = discussion.Description
             };
@@ -46,7 +46,7 @@ namespace Diskussion.Controllers
         {
             var newResponse = new Response()
             {
-                IdAuthor = 3,
+                IdAuthor = long.Parse(HttpContext.Session.GetString("User_Id")),
                 IdDiscussion = response.IdDiscussion,
                 Message = response.Message,
             };

@@ -1,0 +1,24 @@
+﻿@model List<User>
+
+<h1 class="is-size-2">Usuarios</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Fecha de Registro</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>@user.RegistrationDate</td>
+                <td><a asp-action="Delete" asp-route-id="@user.Id">Dar de baja</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

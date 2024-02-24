@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@{
+    // Acceder a HttpContext a través de ViewContext
+    var user_id = ViewContext.HttpContext.Session.GetString("User_Id");
+    var user_name = ViewContext.HttpContext.Session.GetString("User_Name");
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -28,6 +34,15 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Discussion" asp-action="Index">Discusiones</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Register" asp-action="Index">Registrarse</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Index">Iniciar Sesion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index" asp-route-id=@user_id>@user_name</a>
                         </li>
                     </ul>
                 </div>

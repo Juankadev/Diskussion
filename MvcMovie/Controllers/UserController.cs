@@ -13,7 +13,18 @@ namespace Diskussion.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
+            => View(await _context.Users.FirstAsync(u=>u.Id==id));
+
+        public async Task<IActionResult> List()
             => View(await _context.Users.ToListAsync());
+
+        public IActionResult Delete(int id)
+        {
+            var user = _context.Users.First(u => u.Id == id);
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

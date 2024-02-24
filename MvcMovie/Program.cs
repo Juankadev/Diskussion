@@ -19,7 +19,11 @@ builder.Services.AddDbContext<DiskussionDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DiskussionDbContext"));
 });
 
+builder.Services.AddSession();
+
 var app = builder.Build();
+
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

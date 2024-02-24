@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Ingresar";
+}
+<h1 class="is-size-2">Ingresar</h1>
+
+<form asp-action="Verify">
+    <div class="field">
+        <label for="Name" class="label">Nombre de usuario</label>
+        <div class="control">
+            <input required id="Name" name="Name" class="input" type="text" placeholder="juanmanuel...">
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="Password" class="label">Contraseña</label>
+        <div class="control">
+            <input required id="Password" name="Password" class="input" type="password" placeholder="">
+        </div>
+    </div>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button type="submit" class="button is-link">Ingresar</button>
+        </div>
+    </div>
+</form>

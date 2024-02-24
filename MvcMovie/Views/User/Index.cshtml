@@ -1,23 +1,11 @@
-﻿@model List<User>
+﻿@model User
 
-<h1 class="is-size-2">Usuarios</h1>
+<h1 class="is-size-2">Tu perfil</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Fecha de Registro</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var user in Model)
-        {
-            <tr>
-                <td>@user.Name</td>
-                <td>@user.Email</td>
-                <td>@user.RegistrationDate</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<p>Nombre de usuario: @Model.Name</p>
+<p>Email: @Model.Email</p>
+<p>Contraseña: @Model.Password</p>
+<p>Fecha de registro: @Model.RegistrationDate</p>
+
+
+
