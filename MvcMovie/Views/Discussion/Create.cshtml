@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Discusiones";
+}
+<h1 class="is-size-2">Crear una nueva discusion</h1>
+
+<form asp-action="Create">
+    <div class="field">
+        <label for="Title" class="label">Titulo</label>
+        <div class="control">
+            <input id="Title" name="Title" class="input" type="text" placeholder="Titulo...">
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="Description" class="label">Descripcion</label>
+        <div class="control">
+            <textarea id="Description" name="Description" class="textarea" placeholder="Descripcion..."></textarea>
+        </div>
+    </div>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button type="submit" class="button is-link">Publicar</button>
+        </div>
+    </div>
+</form>
