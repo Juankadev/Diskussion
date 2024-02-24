@@ -15,7 +15,9 @@ public partial class Discussion
 
     public DateTime? CreationDate { get; set; }
 
-    public virtual User Author { get; set; } = null!;
+    public bool? State { get; set; }
+
+    public virtual User IdAuthorNavigation { get; set; } = null!;
 
     public virtual ICollection<Response> Responses { get; set; } = new List<Response>();
 }

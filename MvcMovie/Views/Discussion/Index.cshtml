@@ -1,37 +1,66 @@
 ﻿@model List<Discussion>
 @{
     ViewData["Title"] = "Discusiones";
+    var user_id = ViewContext.HttpContext.Session.GetString("User_Id");
 }
 
 <h1 class="is-size-2">Discusiones</h1>
+<br />
 
-<div class="control">
-    <a class="button is-primary" asp-action="Create">Nueva Discusion</a>
-</div>
+@if (user_id != null)
+{
+    <div class="control">
+        <a class="button is-primary" asp-action="Create">Nueva Discusion</a>
+    </div>
+}
 
-<table class="table is-hoverable is-striped">
-    <thead>
-        <tr>
-            <th>Titulo</th>
-            <th>Descripcion</th>
-            <th>Autor</th>
-            <th>Fecha de Creacion</th>
-        </tr>
-    </thead>
-    <tbody>
-        <span><b>@Model.ToArray().Length </b> Discusiones</span>
+<div style="display:flex">
+
+    <div style="width:80%;padding:1rem">
+
+        <div style="display:flex;justify-content:space-between; align-items:center; background-color:aliceblue">
+            <span><b>@Model.ToArray().Length </b> Discusiones</span>
+
+            <div>
+                <span>Filtrar: </span>
+                <div class="select">
+                    <select>
+                        <option>Todas</option>
+                        <option>Sin respuestas</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
         @foreach (var discussion in Model)
         {
-            <tr>
-                <td>@discussion.Title</td>
-                <td>@discussion.Description</td>
-                <td>@Html.DisplayFor(d=>discussion.Author.Name)</td>
-                <td>@discussion.CreationDate</td>
-                <td><a class="button is-info" asp-action="Discussion" asp-route-id=@discussion.Id>Abrir</a></td>
-            </tr>
+            <a style="display:block; padding-top: 1rem; padding-bottom: 1rem; border-top:1.4px solid rgba(242, 247, 103)" asp-action="Discussion" asp-route-id=@discussion.Id>
+                <div style="color:black">
+                    <p style="font-weight:bold">@discussion.Title</p>
+                    <p>@discussion.Description</p>
+                </div>
+            </a>
+
+            <div style="margin-top:1rem; display:flex;justify-content:space-between; margin-bottom:.5rem; align-items:center">
+                <a style="background-color: rgba(242, 247, 103); color:black; padding-top:.5rem;padding-bottom:.5rem;padding-left:2rem;padding-right:2rem;border-radius:.5rem" asp-action="Discussion" asp-route-id=@discussion.Id>Abrir</a>
+
+                <div style="display:flex;justify-content:flex-end;column-gap:2rem">
+                    <p style="font-style:italic">Autor: @Html.DisplayFor(d=>discussion.IdAuthorNavigation.Name)</p>
+                    <p style="font-style:italic">Publicado: @discussion.CreationDate</p>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+
+    @*    <div style="background-color:rgba(0,0,0,0.1); width:20%; padding:1rem;">
+    <p class="is-size-4">Buscar por:</p>
+    <br />
+    <label class="checkbox">
+    <input type="checkbox"> Sin respuestas
+    </label>
+    </div>*@
+
+</div>
+
 
 <div style="margin-bottom:15rem"></div>

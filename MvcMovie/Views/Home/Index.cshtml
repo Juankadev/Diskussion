@@ -1,9 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = null;
 }
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-<div class="text-center">
+@*<div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>*@
+
+<div style="background-color:rgba(242, 247, 103);padding-left:4rem;padding-right:4rem; height:100vh; overflow:hidden">
+    <div style="display:flex; align-items:center; height:100vh">
+        <div>
+            <h1 style="color:black; font-weight:bold; text-transform:uppercase; font-family: 'Comic Sans MS', cursive, sans-serif;" class="is-size-1">Diskussion</h1>
+            <br />
+            <h2 style="color:black; " class="is-size-2">Donde las preguntas encuentran respuestas y las ideas cobran vida</h2>
+            <br /><br />
+            <a asp-area="" asp-controller="Discussion" asp-action="Index" style="font-weight:bold" class="button is-large is-responsive">Comenzar</a>
+        </div>
+        <img src="img/monkey.jpg" style="transform: scaleX(-1); width:45%" />
+    </div>
 </div>

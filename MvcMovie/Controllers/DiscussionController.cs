@@ -15,7 +15,7 @@ namespace Diskussion.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var discussions = _context.Discussions.Include(d=>d.Author).OrderByDescending(d=>d.CreationDate);
+            var discussions = _context.Discussions.Include(d=>d.IdAuthorNavigation).OrderByDescending(d=>d.CreationDate);
             return View(await discussions.ToListAsync());
         }
 
@@ -60,9 +60,9 @@ namespace Diskussion.Controllers
         public async Task<IActionResult> Discussion(int id)
         {
             Discussion discussion = await _context.Discussions
-                .Include(d => d.Author) // Incluir al autor de la discusión
+                .Include(d => d.IdAuthorNavigation) // Incluir al autor de la discusión
                 .Include(d => d.Responses) // Incluir las respuestas de la discusión
-                    .ThenInclude(r => r.User) // Incluir al usuario asociado a cada respuesta
+                    .ThenInclude(r => r.IdAuthorNavigation) // Incluir al usuario asociado a cada respuesta
                 .FirstAsync(d => d.Id == id);
 
             return View(discussion);

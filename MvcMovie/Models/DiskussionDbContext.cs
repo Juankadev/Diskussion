@@ -35,11 +35,12 @@ public partial class DiskussionDbContext : DbContext
             entity.Property(e => e.Description)
                 .HasMaxLength(500)
                 .IsUnicode(false);
+            entity.Property(e => e.State).HasDefaultValueSql("((1))");
             entity.Property(e => e.Title)
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            entity.HasOne(d => d.Author).WithMany(p => p.Discussions)
+            entity.HasOne(d => d.IdAuthorNavigation).WithMany(p => p.Discussions)
                 .HasForeignKey(d => d.IdAuthor)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Discussio__IdAut__35BCFE0A");
@@ -56,13 +57,14 @@ public partial class DiskussionDbContext : DbContext
             entity.Property(e => e.Message)
                 .HasMaxLength(500)
                 .IsUnicode(false);
+            entity.Property(e => e.State).HasDefaultValueSql("((1))");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Responses)
+            entity.HasOne(d => d.IdAuthorNavigation).WithMany(p => p.Responses)
                 .HasForeignKey(d => d.IdAuthor)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Responses__IdAut__3B75D760");
 
-            entity.HasOne(d => d.Discussion).WithMany(p => p.Responses)
+            entity.HasOne(d => d.IdDiscussionNavigation).WithMany(p => p.Responses)
                 .HasForeignKey(d => d.IdDiscussion)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Responses__IdDis__3C69FB99");
@@ -71,6 +73,8 @@ public partial class DiskussionDbContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Users__3214EC07780528A5");
+
+            entity.HasIndex(e => e.Name, "UQ_Users_Name").IsUnique();
 
             entity.HasIndex(e => e.Email, "UQ__Users__A9D10534E492123D").IsUnique();
 
@@ -87,6 +91,7 @@ public partial class DiskussionDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("Registration_Date");
+            entity.Property(e => e.State).HasDefaultValueSql("((1))");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -1,40 +1,52 @@
 ﻿@model Discussion
 @{
     ViewData["Title"] = "Discusiones";
+    var user_id = ViewContext.HttpContext.Session.GetString("User_Id");
 }
+<link href='https://unpkg.com/css.gg@2.0.0/icons/css/heart.css' rel='stylesheet'>
+<br />
+<span class="is-size-5" style="margin-right:2rem;font-weight:500">@Model.IdAuthorNavigation.Name</span>
+<span class="is-size-5">@Model.CreationDate</span>
+<h1 class="is-size-3">@Model.Title</h1>
+<br />
+<p class="is-size-5">@Model.Description</p>
 
-<h1 class="is-size-2">@Model.Title</h1>
-<p class="is-size-5">@Model.Author.Name</p>
-<p class="is-size-4">@Model.Description</p>
-<p class="is-size-5">@Model.CreationDate</p>
-
+<br />
+<br />
+<h3 class="is-size-3">Respuestas</h3>
 <hr style="background-color:black" />
 
+<div style="margin-left:0rem">
 
-@foreach (var response in Model.Responses)
-{
-    <div style="background-color:gainsboro">
-        <p class="is-size-5">@Html.DisplayFor(r=>response.User.Name)</p>
-        <p class="is-size-5">@response.CreationDate</p>
-        <p class="is-size-4">@response.Message</p>
-    </div>
-    <br />
-}
-
-
-<form asp-action="CreateResponse">
-    <input type="hidden" name="IdDiscussion" value=@Model.Id />
-
-    <div class="field">
-        <label for="Message" class="label">Respuesta</label>
-        <div class="control">
-            <textarea id="Message" name="Message" class="textarea" placeholder="Respuesta..."></textarea>
+    @foreach (var response in Model.Responses)
+    {
+        <div style="">
+            <span class="is-size-5" style="margin-right:2rem;font-weight:500">@Html.DisplayFor(r=>response.IdAuthorNavigation.Name)</span>
+            <span class="is-size-5">@response.CreationDate</span>
+            <p class="is-size-5">@response.Message</p>
+            <a style="display:flex;align-items:center;column-gap:.5rem;margin-left:.5rem;margin-top:.5rem"><i class="gg-heart"></i>Gracias</a>
         </div>
-    </div>
+        <hr style="background-color:black" />
+    }
 
-    <div class="field is-grouped">
-        <div class="control">
-            <button type="submit" class="button is-link">Publicar</button>
-        </div>
-    </div>
-</form>
+
+    @if (user_id != null)
+    {
+        <form asp-action="CreateResponse">
+            <input type="hidden" name="IdDiscussion" value=@Model.Id />
+
+            <div class="field">
+                <label for="Message" class="label">Respuesta</label>
+                <div class="control">
+                    <textarea id="Message" name="Message" class="textarea" placeholder="Respuesta..."></textarea>
+                </div>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <button type="submit" class="button" style="background-color:rgba(242, 247, 103)">Publicar</button>
+                </div>
+            </div>
+        </form>
+    }
+</div>

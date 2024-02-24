@@ -1,11 +1,27 @@
-﻿@model User
+﻿@model List<User>
+@{
+    ViewData["Title"] = "Usuarios";
+}
 
-<h1 class="is-size-2">Tu perfil</h1>
+<h1 class="is-size-2">Administración de Usuarios</h1>
 
-<p>Nombre de usuario: @Model.Name</p>
-<p>Email: @Model.Email</p>
-<p>Contraseña: @Model.Password</p>
-<p>Fecha de registro: @Model.RegistrationDate</p>
-
-
-
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Fecha de Registro</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Name</td>
+                <td>@user.Email</td>
+                <td>@user.RegistrationDate</td>
+                <td><a asp-action="Delete" asp-route-id="@user.Id">Dar de baja</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

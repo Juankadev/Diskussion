@@ -23,7 +23,7 @@ namespace Diskussion.Controllers
         {
             _context.Add(user);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index","Login");
+            return RedirectToAction("Index","Home");
         }
     }
 }

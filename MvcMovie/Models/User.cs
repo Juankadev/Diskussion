@@ -15,6 +15,8 @@ public partial class User
 
     public DateTime? RegistrationDate { get; set; }
 
+    public bool? State { get; set; }
+
     public virtual ICollection<Discussion> Discussions { get; set; } = new List<Discussion>();
 
     public virtual ICollection<Response> Responses { get; set; } = new List<Response>();
