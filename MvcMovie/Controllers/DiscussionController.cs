@@ -54,10 +54,10 @@ namespace Diskussion.Controllers
             _context.Add(newResponse);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new {id= response.IdDiscussion});
         }
 
-        public async Task<IActionResult> Discussion(int id)
+        public async Task<IActionResult> Discussion(long id)
         {
             Discussion discussion = await _context.Discussions
                 .Include(d => d.IdAuthorNavigation) // Incluir al autor de la discusión
@@ -68,7 +68,14 @@ namespace Diskussion.Controllers
             return View(discussion);
         }
 
-
+        public async Task<IActionResult> Like(long id)
+        {
+            Response response = _context.Responses.Find(id);
+            response.Likes++;
+            _context.Update(response);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }
 

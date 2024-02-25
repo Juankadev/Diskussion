@@ -6,7 +6,7 @@
 <link href='https://unpkg.com/css.gg@2.0.0/icons/css/heart.css' rel='stylesheet'>
 <br />
 <span class="is-size-5" style="margin-right:2rem;font-weight:500">@Model.IdAuthorNavigation.Name</span>
-<span class="is-size-5">@Model.CreationDate</span>
+<span class="is-size-6">@Model.CreationDate</span>
 <h1 class="is-size-3">@Model.Title</h1>
 <br />
 <p class="is-size-5">@Model.Description</p>
@@ -22,9 +22,12 @@
     {
         <div style="">
             <span class="is-size-5" style="margin-right:2rem;font-weight:500">@Html.DisplayFor(r=>response.IdAuthorNavigation.Name)</span>
-            <span class="is-size-5">@response.CreationDate</span>
+            <span class="is-size-6">@response.CreationDate</span>
             <p class="is-size-5">@response.Message</p>
-            <a style="display:flex;align-items:center;column-gap:.5rem;margin-left:.5rem;margin-top:.5rem"><i class="gg-heart"></i>Gracias</a>
+            <a asp-controller="Discussion" asp-action="Like" asp-route-id=@response.Id style="display:flex;align-items:center;column-gap:.5rem;margin-left:.5rem;margin-top:.5rem">
+                <i class="gg-heart" style="color:red"></i>
+                @response.Likes
+            </a>
         </div>
         <hr style="background-color:black" />
     }

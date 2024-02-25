@@ -17,6 +17,8 @@ public partial class Response
 
     public bool? State { get; set; }
 
+    public int? Likes { get; set; }
+
     public virtual User IdAuthorNavigation { get; set; } = null!;
 
     public virtual Discussion IdDiscussionNavigation { get; set; } = null!;

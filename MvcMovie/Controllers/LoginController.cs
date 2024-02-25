@@ -20,14 +20,14 @@ namespace Diskussion.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Verify(User user)
         {
-            var userExist = _context.Users.FirstOrDefault(u => u.Name == user.Name && u.Password==user.Password);
+            var userExist = _context.Users.FirstOrDefault(u => u.Name == user.Name && u.Password==user.Password && u.State == true);
             if(userExist!=null)
             {
                 HttpContext.Session.SetString("User_Id", userExist.Id.ToString());
                 HttpContext.Session.SetString("User_Name", userExist.Name);
 
                 //dar los permisos necesarios en base al rol (agregar campo en la tabla)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Discussion");
             }
 
             return RedirectToAction("Index");

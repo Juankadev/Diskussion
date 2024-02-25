@@ -1,0 +1,42 @@
+﻿@model User
+@{
+    ViewData["Title"] = "Editar Perfil";
+}
+
+<h1 class="is-size-2">Editar perfil</h1>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id"/>
+
+    <div class="field">
+        <label for="Name" class="label">Nombre de usuario</label>
+        <div class="control">
+            <input required id="Name" name="Name" class="input" type="text" value="@Model.Name">
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="Email" class="label">Email</label>
+        <div class="control">
+            <input required id="Email" name="Email" class="input" type="email" value="@Model.Email">
+        </div>
+    </div>
+
+    <div class="field">
+        <label for="Password" class="label">Contraseña</label>
+        <div class="control">
+            <input required id="Password" name="Password" class="input" type="password" value="@Model.Password">
+        </div>
+    </div>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button type="submit" class="button is-primary">Guardar</button>
+        </div>
+    </div>
+</form>
+
+
+
+
+

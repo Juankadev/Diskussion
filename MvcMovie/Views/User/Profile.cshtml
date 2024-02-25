@@ -1,11 +1,16 @@
 ﻿@model User
+@{
+    ViewData["Title"]="Mi Perfil";
+}
 
 <h1 class="is-size-2">Tu perfil</h1>
+<a class="button is-warning" asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
 
 <p>Nombre de usuario: @Model.Name</p>
 <p>Email: @Model.Email</p>
 <p>Contraseña: @Model.Password</p>
 <p>Fecha de registro: @Model.RegistrationDate</p>
+
 
 
 

@@ -16,8 +16,24 @@
             <br />
             <h2 style="color:black; " class="is-size-2">Donde las preguntas encuentran respuestas y las ideas cobran vida</h2>
             <br /><br />
-            <a asp-area="" asp-controller="Discussion" asp-action="Index" style="font-weight:bold" class="button is-large is-responsive">Comenzar</a>
+            <a asp-area="" asp-controller="Discussion" asp-action="Index" onmouseover="changeImage(true)" onmouseout="changeImage(false)" style="font-weight:bold" class="button is-large is-responsive">Comenzar</a>
         </div>
-        <img src="img/monkey.jpg" style="transform: scaleX(-1); width:45%" />
+        <img id="img1" src="img/monkey1.png" style="transform: scaleX(-1); width:45%; display: block;" />
+        <img id="img2" src="img/monkey2.png" style="transform: scaleX(-1); width:45%; display: none" />
     </div>
 </div>
+
+
+
+
+<script>
+    function changeImage(hover) {
+        if (hover) {
+            document.getElementById('img1').style.display = 'none';
+            document.getElementById('img2').style.display = 'block';
+        } else {
+            document.getElementById('img1').style.display = 'block';
+            document.getElementById('img2').style.display = 'none';
+        }
+    }
+</script>

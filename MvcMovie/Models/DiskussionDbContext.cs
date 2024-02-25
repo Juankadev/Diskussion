@@ -35,7 +35,9 @@ public partial class DiskussionDbContext : DbContext
             entity.Property(e => e.Description)
                 .HasMaxLength(500)
                 .IsUnicode(false);
-            entity.Property(e => e.State).HasDefaultValueSql("((1))");
+            entity.Property(e => e.State)
+                .IsRequired()
+                .HasDefaultValueSql("((1))");
             entity.Property(e => e.Title)
                 .HasMaxLength(100)
                 .IsUnicode(false);
@@ -54,10 +56,13 @@ public partial class DiskussionDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("Creation_Date");
+            entity.Property(e => e.Likes).HasDefaultValueSql("((0))");
             entity.Property(e => e.Message)
                 .HasMaxLength(500)
                 .IsUnicode(false);
-            entity.Property(e => e.State).HasDefaultValueSql("((1))");
+            entity.Property(e => e.State)
+                .IsRequired()
+                .HasDefaultValueSql("((1))");
 
             entity.HasOne(d => d.IdAuthorNavigation).WithMany(p => p.Responses)
                 .HasForeignKey(d => d.IdAuthor)
@@ -91,7 +96,9 @@ public partial class DiskussionDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("Registration_Date");
-            entity.Property(e => e.State).HasDefaultValueSql("((1))");
+            entity.Property(e => e.State)
+                .IsRequired()
+                .HasDefaultValueSql("((1))");
         });
 
         OnModelCreatingPartial(modelBuilder);
