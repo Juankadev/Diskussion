@@ -15,7 +15,7 @@ namespace Diskussion.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var discussions = _context.Discussions.Include(d=>d.IdAuthorNavigation).OrderByDescending(d=>d.CreationDate);
+            var discussions = _context.Discussions.Include(d=>d.IdAuthorNavigation).Include(d=>d.Responses).OrderByDescending(d=>d.CreationDate);
             return View(await discussions.ToListAsync());
         }
 

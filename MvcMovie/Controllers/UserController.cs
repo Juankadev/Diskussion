@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Diskussion.Models;
+using Diskussion.Models.ViewModels;
 
 namespace Diskussion.Controllers
 {
@@ -18,8 +19,15 @@ namespace Diskussion.Controllers
             => View(await _context.Users.ToListAsync());
 
         // Admin - User - View Your Profile
-        public async Task<IActionResult> Profile(long? id)
-            => View(await _context.Users.FirstAsync(u => u.Id == id));
+        public IActionResult Profile(long id)
+        {
+            ProfileViewModel profileVM = new ProfileViewModel();
+            profileVM.User = _context.Users.Find(id);
+            if (profileVM.User == null) return NotFound();
+            profileVM.Discussions = _context.Discussions.Where(d => d.IdAuthor == id).ToList();
+            return View(profileVM);
+        }
+            
 
         // Admin - Delete One User
         public async Task<IActionResult> Delete(long id)

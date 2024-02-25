@@ -21,6 +21,8 @@ namespace Diskussion.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(User user)
         {
+            if (!ModelState.IsValid) return View("Index");
+
             _context.Add(user);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index","Login");

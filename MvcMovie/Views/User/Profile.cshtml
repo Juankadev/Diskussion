@@ -1,15 +1,41 @@
-﻿@model User
+﻿@using Diskussion.Models.ViewModels
+@model ProfileViewModel
 @{
     ViewData["Title"]="Mi Perfil";
 }
 
 <h1 class="is-size-2">Tu perfil</h1>
-<a class="button is-warning" asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+<a class="button is-warning" asp-controller="User" asp-action="Edit" asp-route-id="@Model.User.Id">Editar</a>
 
-<p>Nombre de usuario: @Model.Name</p>
-<p>Email: @Model.Email</p>
-<p>Contraseña: @Model.Password</p>
-<p>Fecha de registro: @Model.RegistrationDate</p>
+<p>Nombre de usuario: @Model.User.Name</p>
+<p>Email: @Model.User.Email</p>
+<p>Contraseña: @Model.User.Password</p>
+<p>Fecha de registro: @Model.User.RegistrationDate</p>
+
+<br /><br />
+
+<h2>Mis discusiones</h2>
+@foreach (var discussion in Model.Discussions)
+{
+    <a style="display:block; padding-top: 1rem; padding-bottom: 1rem; border-top:1.4px solid rgba(242, 247, 103)" asp-action="Discussion" asp-route-id=@discussion.Id>
+        <div style="color:black">
+            <p style="font-weight:bold">@discussion.Title</p>
+            <p>@discussion.Description</p>
+        </div>
+    </a>
+
+    <div style="margin-top:1rem; display:flex;justify-content:space-between; margin-bottom:.5rem; align-items:center">
+        <a style="background-color: rgba(242, 247, 103); color:black; padding-top:.5rem;padding-bottom:.5rem;padding-left:2rem;padding-right:2rem;border-radius:.5rem" asp-action="Discussion" asp-route-id=@discussion.Id>
+            <i class="bi bi-eye-fill"></i>
+            Abrir
+        </a>
+
+        <div style="display:flex;justify-content:flex-end;column-gap:2rem">
+            <p style="font-style:italic">Respuestas: @discussion.Responses.Count</p>         
+            <p style="font-style:italic">Publicado: @discussion.CreationDate</p>
+        </div>
+    </div>
+}
 
 
 

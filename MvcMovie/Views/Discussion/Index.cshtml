@@ -43,9 +43,13 @@
             </a>
 
             <div style="margin-top:1rem; display:flex;justify-content:space-between; margin-bottom:.5rem; align-items:center">
-                <a style="background-color: rgba(242, 247, 103); color:black; padding-top:.5rem;padding-bottom:.5rem;padding-left:2rem;padding-right:2rem;border-radius:.5rem" asp-action="Discussion" asp-route-id=@discussion.Id>Abrir</a>
+                <a style="background-color: rgba(242, 247, 103); color:black; padding-top:.5rem;padding-bottom:.5rem;padding-left:2rem;padding-right:2rem;border-radius:.5rem" asp-action="Discussion" asp-route-id=@discussion.Id>
+                    <i class="bi bi-eye-fill"></i> 
+                    Abrir
+                </a>
 
                 <div style="display:flex;justify-content:flex-end;column-gap:2rem">
+                    <p style="font-style:italic">Respuestas: @discussion.Responses.Count</p>
                     <p style="font-style:italic">Autor: @Html.DisplayFor(d=>discussion.IdAuthorNavigation.Name)</p>
                     <p style="font-style:italic">Publicado: @discussion.CreationDate</p>
                 </div>
@@ -53,13 +57,13 @@
         }
     </div>
 
-    @*    <div style="background-color:rgba(0,0,0,0.1); width:20%; padding:1rem;">
-    <p class="is-size-4">Buscar por:</p>
-    <br />
-    <label class="checkbox">
-    <input type="checkbox"> Sin respuestas
-    </label>
-    </div>*@
+    <div style="background-color:rgba(0,0,0,0.1); width:20%; padding:1rem;">
+        <p class="is-size-4">Buscar por:</p>
+        <br />
+        <label class="checkbox">
+            <input type="checkbox"> Sin respuestas
+        </label>
+    </div>
 
 </div>
 

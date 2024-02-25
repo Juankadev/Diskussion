@@ -23,7 +23,11 @@
                 <td>@user.Email</td>
                 <td>@user.RegistrationDate</td>
                 <td>@user.State</td>
-                <td><a asp-action="Delete" asp-route-id="@user.Id">Dar de baja</a></td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@user.Id">
+                        <i class="bi bi-x-circle"></i> Dar de baja
+                    </a>
+                </td>
             </tr>
         }
     </tbody>
