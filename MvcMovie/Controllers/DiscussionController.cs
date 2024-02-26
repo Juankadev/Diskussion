@@ -54,7 +54,7 @@ namespace Diskussion.Controllers
             _context.Add(newResponse);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index), new {id= response.IdDiscussion});
+            return RedirectToAction(nameof(Discussion), new {id= response.IdDiscussion});
         }
 
         public async Task<IActionResult> Discussion(long id)
