@@ -59,6 +59,8 @@ namespace Diskussion.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(User user)
         {
+            if (!ModelState.IsValid) return View(user);
+
             if (user == null)
                 return NotFound();
 
@@ -74,7 +76,7 @@ namespace Diskussion.Controllers
             _context.Update(userDb);
             _context.SaveChanges();
 
-            return RedirectToAction("Profile", new { id = userDb.Id });
+            return RedirectToAction(nameof(Profile), new { id = userDb.Id });
         }
     }
 }

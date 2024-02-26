@@ -1,13 +1,17 @@
-﻿@{
+﻿@using Diskussion.Models.ViewModels
+@model DiscussionViewModel
+@{
     ViewData["Title"] = "Discusiones";
 }
 <h1 class="is-size-2">Crear una nueva discusion</h1>
 
 <form asp-action="Create">
+
     <div class="field">
         <label for="Title" class="label">Titulo</label>
         <div class="control">
-            <input id="Title" name="Title" class="input" type="text" placeholder="Titulo...">
+            <input asp-for="Title" id="Title" name="Title" class="input" type="text">
+            <span asp-validation-for="Title" class="has-text-danger"></span>
         </div>
     </div>
 

@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Diskussion.Models.ViewModels
+@model LoginViewModel
+@{
     ViewData["Title"] = "Ingresar";
 }
 <h1 class="is-size-2">Ingresar</h1>
@@ -7,14 +9,16 @@
     <div class="field">
         <label for="Name" class="label">Nombre de usuario</label>
         <div class="control">
-            <input required id="Name" name="Name" class="input" type="text" placeholder="juanmanuel...">
+            <input asp-for="Name" id="Name" name="Name" class="input" type="text">
+            <span asp-validation-for="Name" class="has-text-danger"></span>
         </div>
     </div>
 
     <div class="field">
         <label for="Password" class="label">Contraseña</label>
         <div class="control">
-            <input required id="Password" name="Password" class="input" type="password" placeholder="">
+            <input asp-for="Password" id="Password" name="Password" class="input" type="password">
+            <span asp-validation-for="Password" class="has-text-danger"></span>
         </div>
     </div>
 
