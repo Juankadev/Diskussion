@@ -14,9 +14,13 @@ namespace Diskussion.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string title)
         {
-            var discussions = _context.Discussions.Include(d=>d.IdAuthorNavigation).Include(d=>d.Responses).OrderByDescending(d=>d.CreationDate);
+            IQueryable<Discussion> discussions = _context.Discussions.Include(d => d.IdAuthorNavigation).Include(d => d.Responses).OrderByDescending(d => d.CreationDate);
+
+            if (!string.IsNullOrEmpty(title))
+                discussions = discussions.Where(d => d.Title.Contains(title));
+
             return View(await discussions.ToListAsync());
         }
 
