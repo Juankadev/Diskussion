@@ -36,7 +36,7 @@
     @if (user_id != null)
     {
         <form asp-action="CreateResponse">
-            <input type="hidden" name="IdDiscussion" value=@Model.Id />
+            <input id="IdDiscussion" type="hidden" name="IdDiscussion" value=@Model.Id />
 
             <div class="field">
                 <label for="Message" class="label">Respuesta</label>

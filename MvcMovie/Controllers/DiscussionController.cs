@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Diskussion.Models;
+using Diskussion.Models.ViewModels;
 
 namespace Diskussion.Controllers
 {
@@ -26,8 +27,10 @@ namespace Diskussion.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Discussion discussion)
+        public async Task<IActionResult> Create(DiscussionViewModel discussion)
         {
+            if (!ModelState.IsValid) return View(discussion);
+
             var newDiscussion = new Discussion()
             {
                 IdAuthor = long.Parse(HttpContext.Session.GetString("User_Id")),
@@ -44,6 +47,9 @@ namespace Diskussion.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateResponse(Response response)
         {
+            if(string.IsNullOrEmpty(response.Message)) 
+                return RedirectToAction(nameof(Discussion), new { id = response.IdDiscussion });
+
             var newResponse = new Response()
             {
                 IdAuthor = long.Parse(HttpContext.Session.GetString("User_Id")),
@@ -74,7 +80,7 @@ namespace Diskussion.Controllers
             response.Likes++;
             _context.Update(response);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
     }
 }
