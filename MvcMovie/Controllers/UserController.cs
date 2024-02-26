@@ -23,11 +23,27 @@ namespace Diskussion.Controllers
         {
             ProfileViewModel profileVM = new ProfileViewModel();
             profileVM.User = _context.Users.Find(id);
-            if (profileVM.User == null) return NotFound();
-            profileVM.Discussions = _context.Discussions.Where(d => d.IdAuthor == id && d.State==true).ToList();
+
+            if (profileVM.User == null) 
+                return NotFound();
+
+            profileVM.Discussions =
+                _context.Discussions.Where(d => d.IdAuthor == id && d.State == true).Include(d=>d.Responses).ToList();
+
+            // Set responses
+            var newDiscussionsList = new List<Discussion>();
+            foreach (var dis in profileVM.Discussions)
+            {
+                dis.Responses = dis.Responses.Where(r => r.State == true).ToList();
+                newDiscussionsList.Add(dis);
+            }
+
+            // Set with responses filtered
+            profileVM.Discussions = newDiscussionsList;
+
             return View(profileVM);
         }
-            
+
 
         // Admin - Delete One User
         public async Task<IActionResult> Delete(long id)
@@ -66,7 +82,7 @@ namespace Diskussion.Controllers
 
             var userDb = _context.Users.Find(user.Id);
 
-            if (userDb == null) 
+            if (userDb == null)
                 return NotFound();
 
             userDb.Name = user.Name;

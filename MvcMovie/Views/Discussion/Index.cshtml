@@ -22,7 +22,7 @@
         <div style="display:flex;justify-content:space-between; align-items:center; background-color:aliceblue">
             <span><b>@Model.ToArray().Length </b> Discusiones</span>
 
-            <div>
+@*            <div>
                 <span>Filtrar: </span>
                 <div class="select">
                     <select>
@@ -30,7 +30,7 @@
                         <option>Sin respuestas</option>
                     </select>
                 </div>
-            </div>
+            </div>*@
         </div>
 
         @foreach (var discussion in Model)
@@ -57,13 +57,13 @@
         }
     </div>
 
-    <div style="background-color:rgba(0,0,0,0.1); width:20%; padding:1rem;">
+@*    <div style="background-color:rgba(0,0,0,0.1); width:20%; padding:1rem;">
         <p class="is-size-4">Buscar por:</p>
         <br />
         <label class="checkbox">
             <input type="checkbox"> Sin respuestas
         </label>
-    </div>
+    </div>*@
 
 </div>
 

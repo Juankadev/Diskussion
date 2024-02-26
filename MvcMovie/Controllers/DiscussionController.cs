@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Diskussion.Models;
 using Diskussion.Models.ViewModels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Diskussion.Controllers
 {
@@ -21,7 +22,16 @@ namespace Diskussion.Controllers
             if (!string.IsNullOrEmpty(title))
                 discussions = discussions.Where(d => d.Title.Contains(title));
 
-            return View(await discussions.ToListAsync());
+            var list = await discussions.ToListAsync();
+            var newList = new List<Discussion>();
+
+            foreach (var dis in list)
+            {
+                dis.Responses = dis.Responses.Where(r=>r.State==true).ToList();
+                newList.Add(dis);
+            }
+
+            return View(newList);
         }
 
         public IActionResult Create()
@@ -75,6 +85,8 @@ namespace Diskussion.Controllers
                     .ThenInclude(r => r.IdAuthorNavigation) // Incluir al usuario asociado a cada respuesta
                 .FirstAsync(d => d.Id == id);
 
+            discussion.Responses = discussion.Responses.Where(r => r.State == true).ToList();
+
             return View(discussion);
         }
 
@@ -85,6 +97,22 @@ namespace Diskussion.Controllers
             _context.Update(response);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> DeleteResponse(long? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var response = _context.Responses.Find(id);
+
+            if (response == null)
+                return NotFound();
+
+            response.State = false;
+            _context.Responses.Update(response);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Discussion), new { id = response.IdDiscussion });
         }
     }
 }
