@@ -1,7 +1,7 @@
 ﻿@using Diskussion.Models.ViewModels
 @model ProfileViewModel
 @{
-    ViewData["Title"]="Mi Perfil";
+    ViewData["Title"] = "Mi Perfil";
 }
 
 <h1 class="is-size-2">Tu perfil</h1>
@@ -12,7 +12,8 @@
 <p>Contraseña: @Model.User.Password</p>
 <p>Fecha de registro: @Model.User.RegistrationDate</p>
 
-<br /><br />
+<br />
+<br />
 
 <h2>Mis discusiones</h2>
 @foreach (var discussion in Model.Discussions)
@@ -25,13 +26,19 @@
     </a>
 
     <div style="margin-top:1rem; display:flex;justify-content:space-between; margin-bottom:.5rem; align-items:center">
-        <a style="background-color: rgba(242, 247, 103); color:black; padding-top:.5rem;padding-bottom:.5rem;padding-left:2rem;padding-right:2rem;border-radius:.5rem" asp-action="Discussion" asp-route-id=@discussion.Id>
-            <i class="bi bi-eye-fill"></i>
-            Abrir
-        </a>
+        <div>
+            <a class="button is-warning" asp-action="Discussion" asp-route-id=@discussion.Id>
+                <i class="bi bi-eye-fill"></i>
+                Abrir
+            </a>
+            <a class="button is-danger" asp-action="DeleteDiscussion" asp-controller="User" asp-route-id=@discussion.Id>
+                <i class="bi bi-x-circle"></i>
+                Eliminar
+            </a>
+        </div>
 
         <div style="display:flex;justify-content:flex-end;column-gap:2rem">
-            <p style="font-style:italic">Respuestas: @discussion.Responses.Count</p>         
+            <p style="font-style:italic">Respuestas: @discussion.Responses.Count</p>
             <p style="font-style:italic">Publicado: @discussion.CreationDate</p>
         </div>
     </div>

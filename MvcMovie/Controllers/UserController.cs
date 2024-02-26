@@ -24,7 +24,7 @@ namespace Diskussion.Controllers
             ProfileViewModel profileVM = new ProfileViewModel();
             profileVM.User = _context.Users.Find(id);
             if (profileVM.User == null) return NotFound();
-            profileVM.Discussions = _context.Discussions.Where(d => d.IdAuthor == id).ToList();
+            profileVM.Discussions = _context.Discussions.Where(d => d.IdAuthor == id && d.State==true).ToList();
             return View(profileVM);
         }
             
@@ -77,6 +77,22 @@ namespace Diskussion.Controllers
             _context.SaveChanges();
 
             return RedirectToAction(nameof(Profile), new { id = userDb.Id });
+        }
+
+        public async Task<IActionResult> DeleteDiscussion(long? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var discussion = _context.Discussions.Find(id);
+
+            if (discussion == null)
+                return NotFound();
+
+            discussion.State = false;
+            _context.Discussions.Update(discussion);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Profile), new { id = discussion.IdAuthor });
         }
     }
 }
