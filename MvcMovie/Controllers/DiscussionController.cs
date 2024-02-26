@@ -14,7 +14,7 @@ namespace Diskussion.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string title)
         {
             IQueryable<Discussion> discussions = _context.Discussions.Where(d=>d.State==true).Include(d => d.IdAuthorNavigation).Include(d => d.Responses).OrderByDescending(d => d.CreationDate);
 
