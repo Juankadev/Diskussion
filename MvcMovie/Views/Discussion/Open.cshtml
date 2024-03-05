@@ -32,7 +32,7 @@
 
             @if (user_id != null && long.Parse(user_id) == response.IdAuthor)
             {
-                <a class="has-text-danger" asp-action="DeleteResponse" asp-controller="Discussion" asp-route-id=@response.Id>
+                <a class="has-text-danger" asp-action="Delete" asp-controller="Response" asp-route-id=@response.Id>
                     <i class="bi bi-x-circle"></i>
                     Eliminar Respuesta
                 </a>
@@ -45,7 +45,7 @@
 
     @if (user_id != null)
     {
-        <form asp-action="CreateResponse">
+        <form asp-action="Create" asp-controller="Response">
             <input id="IdDiscussion" type="hidden" name="IdDiscussion" value=@Model.Id />
 
             <div class="field">

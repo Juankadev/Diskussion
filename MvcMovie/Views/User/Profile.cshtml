@@ -18,7 +18,7 @@
 <h2>Mis discusiones</h2>
 @foreach (var discussion in Model.Discussions)
 {
-    <a style="display:block; padding-top: 1rem; padding-bottom: 1rem; border-top:1.4px solid rgba(242, 247, 103)" asp-action="Discussion" asp-route-id=@discussion.Id>
+    <a style="display:block; padding-top: 1rem; padding-bottom: 1rem; border-top:1.4px solid rgba(242, 247, 103)" asp-action="Open" asp-controller="Discussion" asp-route-id=@discussion.Id>
         <div style="color:black">
             <p style="font-weight:bold">@discussion.Title</p>
             <p>@discussion.Description</p>
@@ -27,11 +27,11 @@
 
     <div style="margin-top:1rem; display:flex;justify-content:space-between; margin-bottom:.5rem; align-items:center">
         <div>
-            <a class="button is-warning" asp-controller="Discussion" asp-action="Discussion" asp-route-id=@discussion.Id>
+            <a class="button is-warning" asp-controller="Discussion" asp-action="Open" asp-route-id=@discussion.Id>
                 <i class="bi bi-eye-fill"></i>
                 Abrir
             </a>
-            <a class="button is-danger" asp-action="DeleteDiscussion" asp-controller="User" asp-route-id=@discussion.Id>
+            <a class="button is-danger" asp-action="Delete" asp-controller="Discussion" asp-route-id=@discussion.Id>
                 <i class="bi bi-x-circle"></i>
                 Eliminar
             </a>

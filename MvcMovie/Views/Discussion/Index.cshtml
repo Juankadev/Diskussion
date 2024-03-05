@@ -35,7 +35,7 @@
 
         @foreach (var discussion in Model)
         {
-            <a style="display:block; padding-top: 1rem; padding-bottom: 1rem; border-top:1.4px solid rgba(242, 247, 103)" asp-action="Discussion" asp-route-id=@discussion.Id>
+            <a style="display:block; padding-top: 1rem; padding-bottom: 1rem; border-top:1.4px solid rgba(242, 247, 103)" asp-action="Open" asp-controller="Discussion" asp-route-id=@discussion.Id>
                 <div style="color:black">
                     <p style="font-weight:bold">@discussion.Title</p>
                     <p>@discussion.Description</p>
@@ -43,7 +43,7 @@
             </a>
 
             <div style="margin-top:1rem; display:flex;justify-content:space-between; margin-bottom:.5rem; align-items:center">
-                <a style="background-color: rgba(242, 247, 103); color:black; padding-top:.5rem;padding-bottom:.5rem;padding-left:2rem;padding-right:2rem;border-radius:.5rem" asp-action="Discussion" asp-route-id=@discussion.Id>
+                <a style="background-color: rgba(242, 247, 103); color:black; padding-top:.5rem;padding-bottom:.5rem;padding-left:2rem;padding-right:2rem;border-radius:.5rem" asp-action="Open" asp-controller="Discussion" asp-route-id=@discussion.Id>
                     <i class="bi bi-eye-fill"></i> 
                     Abrir
                 </a>

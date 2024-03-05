@@ -8,11 +8,16 @@
 
 using Microsoft.EntityFrameworkCore;
 using Diskussion.Models;
+using Diskussion.Repositories;
+using Diskussion.Repositories.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IDiscussionRepository, DiscussionRepository>();
+builder.Services.AddScoped<IResponseRepository, ResponseRepository>();
 
 builder.Services.AddDbContext<DiskussionDbContext>(options =>
 {
