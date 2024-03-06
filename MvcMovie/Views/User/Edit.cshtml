@@ -1,6 +1,7 @@
 ﻿@model User
 @{
     ViewData["Title"] = "Editar Perfil";
+    var user_password = ViewContext.HttpContext.Session.GetString("User_Password");
 }
 
 <h1 class="is-size-2">Editar perfil</h1>
@@ -26,9 +27,9 @@
     </div>
 
     <div class="field">
-        <label for="Password" class="label">Contraseña</label>
+        <label for="Password" class="label">Nueva Contraseña</label>
         <div class="control">
-            <input asp-for="Password" id="Password" name="Password" class="input" type="password">
+            <input asp-for="Password" id="Password" name="Password" class="input" value=@user_password>
             <span asp-validation-for="Password" class="has-text-danger"></span>
         </div>
     </div>

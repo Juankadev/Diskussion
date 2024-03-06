@@ -3,6 +3,7 @@ using Diskussion.Models;
 using Diskussion.Models.ViewModels;
 using Diskussion.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Diskussion.Utils;
 
 namespace Diskussion.Controllers
 {
@@ -23,7 +24,9 @@ namespace Diskussion.Controllers
         public async Task<IActionResult> Profile(long? id)
         {
             if (id == null) return NotFound();
+
             var user = await _userRepository.GetById(id);
+
             if (user == null) return NotFound();
 
             ProfileViewModel profileVM = new ProfileViewModel();
@@ -60,8 +63,14 @@ namespace Diskussion.Controllers
         {
             if (!ModelState.IsValid) return View(user);
 
+            var originalPassword = user.Password;
+            user.Password = Encrypt.GETSHA256(user.Password);
+
             _userRepository.Update(user);
             await _userRepository.Save();
+
+            HttpContext.Session.SetString("User_Name", user.Name);
+            HttpContext.Session.SetString("User_Password", originalPassword);
 
             return RedirectToAction(nameof(Profile), new { id = user.Id });
         }

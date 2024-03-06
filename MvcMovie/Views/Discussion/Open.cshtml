@@ -24,11 +24,11 @@
             <span class="is-size-5" style="margin-right:2rem;font-weight:500">@Html.DisplayFor(r=>response.IdAuthorNavigation.Name)</span>
             <span class="is-size-6">@response.CreationDate</span>
             <p class="is-size-5">@response.Message</p>
-
+@*
             <a asp-controller="Discussion" asp-action="Like" asp-route-id=@response.Id style="display:flex;align-items:center;column-gap:.5rem;margin-left:.5rem;margin-top:.5rem">
                 <i class="gg-heart" style="color:red"></i>
                 @response.Likes
-            </a>
+            </a>*@
 
             @if (user_id != null && long.Parse(user_id) == response.IdAuthor)
             {

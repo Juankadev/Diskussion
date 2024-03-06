@@ -15,8 +15,6 @@ public partial class Response
 
     public DateTime? CreationDate { get; set; }
 
-    public bool? State { get; set; }
-
     public int? Likes { get; set; }
 
     public virtual User IdAuthorNavigation { get; set; } = null!;

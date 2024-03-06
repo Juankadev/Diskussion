@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Diskussion.Models;
 
@@ -15,8 +14,6 @@ public partial class Discussion
     public string? Description { get; set; }
 
     public DateTime? CreationDate { get; set; }
-
-    public bool? State { get; set; }
 
     public virtual User IdAuthorNavigation { get; set; } = null!;
 

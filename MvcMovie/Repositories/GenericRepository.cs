@@ -8,7 +8,7 @@ namespace Diskussion.Repositories
     public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly DiskussionDbContext _context;
-        protected DbSet<T> _dbSet;
+        protected readonly DbSet<T> _dbSet;
 
         protected GenericRepository(DiskussionDbContext context)
         {
@@ -25,17 +25,13 @@ namespace Diskussion.Repositories
 
             return query;
         }
-
-
         public async Task<T?> GetById(long? id) 
             => await _dbSet.FindAsync(id);
-
         public async Task<T> Insert(T entity)
         {
             var result = await _dbSet.AddAsync(entity);
             return result.Entity;
         }
-
         //public async Task<bool> SoftDelete(long id)
         //{
         //    T? entity = await GetById(id);
@@ -46,7 +42,6 @@ namespace Diskussion.Repositories
 
         //    return true;
         //}
-
         public async Task<bool> HardDelete(long? id)
         {
             T? entity = await GetById(id);
@@ -55,12 +50,10 @@ namespace Diskussion.Repositories
             _dbSet.Remove(entity);
             return true;
         }
-
         public void Update(T entity)
         {
             _dbSet.Update(entity);
         }
-
         public async Task Save()
         {
             await _context.SaveChangesAsync();
